@@ -1,0 +1,264 @@
+import java.util.*;
+
+public class sudoku 
+{
+	public static int[][] sudoku=new int[9][9];
+	public static int[][] option=new int[9][9];
+	public static void main(String args[])
+	{
+		Scanner s=new Scanner(System.in);
+		System.out.println("enter sudoku, 0 for no");
+		for(int i=0;i<9;i++)
+		{
+			for(int j=0;j<9;j++)
+			{
+				sudoku[i][j]=Integer.parseInt(s.nextLine());
+			}
+		}
+		for(int i=0;i<9;i++)
+		{
+			for(int j=0;j<9;j++)
+			{
+				option[i][j]=1;
+			}
+		}
+		for(int i=0;i<9;i++)
+		{
+			for(int j=0;j<9;j++)
+			{
+				if(sudoku[i][j]==0)
+				{
+					fill(i,j);
+				}	
+			}
+		}
+		
+	}
+	public static void fill(int i,int j)
+	{
+		sudoku[i][j]=option[i][j];
+		option[i][j]++;
+		while(!check(i,j))
+		{
+			incrementalfill(i,j);
+			if(option[i][j]==10)
+			{
+				break;
+			}
+		}
+		if(option[i][j]==10)
+		{
+			option[i][j]=1;
+			if(i!=0)
+			{
+				fill(i-1, j);
+			}
+			else
+			{
+				fill(i-1 % 9, j-1);
+		
+			}
+		}
+	}
+	public static void incrementalfill(int i, int j)
+	{
+		sudoku[i][j]=option[i][j];
+		option[i][j]++;
+	}
+	
+	
+	
+	public void print(int[][] a)
+	{
+		for(int i=0;i<9;i++)
+		{
+			for(int j=0;j<9;j++)
+			{
+				System.out.print(a[i][j]);
+				System.out.print("  ");
+			}
+			System.out.println(" ");
+		}
+	}
+	
+	public static boolean check(int i, int j)
+	{
+		boolean result=true;
+		for(int p=0;p<9;p++)
+		{
+			if(j!=p)
+			{
+				if(sudoku[i][p]==sudoku[i][j])
+				{
+					result=false;
+					return result;
+				}
+			}
+		}
+		for(int p=0;p<9;p++)
+		{
+			if(i!=p)
+			{
+				if(sudoku[p][j]==sudoku[i][j])
+				{
+					result=false;
+					return result;
+				}
+			}
+		}
+		if(i<=2 && j<=2)
+		{
+			for(int t=0;t<=2;t++)
+			{
+				for(int g=0;g<=2;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=2 && j<=5 && j>2)
+		{
+			for(int t=0;t<=2;t++)
+			{
+				for(int g=3;g<=5;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=2 && j<=8 &&j<5)
+		{
+			for(int t=0;t<=2;t++)
+			{
+				for(int g=6;g<=8;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=5 && i>2 && j<=2)
+		{
+			for(int t=3;t<=5;t++)
+			{
+				for(int g=0;g<=2;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=5 && i>2 && j<=5 && j>2)
+		{
+			for(int t=3;t<=5;t++)
+			{
+				for(int g=3;g<=5;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=5 && i>2 && j<=8 && j>5)
+		{
+			for(int t=3;t<=5;t++)
+			{
+				for(int g=6;g<=8;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=8 && i>5 && j<=2)
+		{
+			for(int t=6;t<=8;t++)
+			{
+				for(int g=0;g<=2;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=8 && i>5 && j<=5 && j>2)
+		{
+			for(int t=6;t<=8;t++)
+			{
+				for(int g=3;g<=5;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		if(i<=8 && i>5 && j<=8 && j>5)
+		{
+			for(int t=6;t<=8;t++)
+			{
+				for(int g=6;g<=8;g++)
+				{
+					if(i!=t || g!=j)
+					{
+						if(sudoku[i][j]==sudoku[t][g])
+						{
+							result=false;
+							return result;
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+}
